@@ -1,4 +1,64 @@
-# counts the length of the board selecting the X's and O's that are filled
+#winning combinations
+WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+
+
+def turn(board)
+  #get user input
+  puts "Please enter 1-9:"
+  input = gets.strip
+  #convert input to index using helper method
+  index = input_to_index(input)
+  #if index is valid make the move with input using helper methods
+  if valid_move?(board,index) == true
+    move(board,index,value="X")
+    display_board(board)
+  #else prompt user to enter input again until correct / rinse & repeat
+ else
+    puts "Please enter 1-9:"
+    input = gets.strip 
+ end 
+end
+
+# helper method: #valid_move? 
+def valid_move?(board,index)
+  if (0..8).include?(index) && position_taken?(board,index) == false
+    true
+  else
+    false 
+  end
+end 
+
+# helper method: #position_taken? 
+def position_taken?(board,index)
+  if board[index] == " " || board[index] == "" || board[index] == nil
+    false 
+  else
+    true 
+  end 
+end 
+
+# helper method: #move 
+def move(board,index,value="X")
+  board[index] = value 
+end 
+
+# helper method: #input_to_index
+def input_to_index(input)
+  if (0..10).include? input.to_i
+    input.to_i - 1
+  else
+    -1
+  end
+end 
+  
+# helper method: #display_board
+def display_board(board)
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+end # counts the length of the board selecting the X's and O's that are filled
 def turn_count(board)
    board.select{|a| a=="X" || a=="O"}.length
 end
@@ -17,8 +77,6 @@ def position_taken?(board, index)
   !(board[index].nil? || board[index] == " ")
 end
 
-# Define your WIN_COMBINATIONS constant 
-WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
 def won? (board)
    result = WIN_COMBINATIONS.map do |wincombo| 
