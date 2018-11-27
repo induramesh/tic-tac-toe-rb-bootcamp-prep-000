@@ -1,6 +1,23 @@
 #winning combinations
 WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
+# displays the board in the game 
+def display_board(board)
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+end 
+
+# helper method: input_to_index
+def input_to_index(input)
+  if (0..10).include? input.to_i
+    input.to_i - 1
+  else
+    -1
+  end
+end 
 
 def turn(board)
   #get user input
@@ -42,23 +59,10 @@ def move(board,index,value="X")
   board[index] = value 
 end 
 
-# helper method: #input_to_index
-def input_to_index(input)
-  if (0..10).include? input.to_i
-    input.to_i - 1
-  else
-    -1
-  end
-end 
+
   
-# helper method: #display_board
-def display_board(board)
-  puts " #{board[0]} | #{board[1]} | #{board[2]} "
-  puts "-----------"
-  puts " #{board[3]} | #{board[4]} | #{board[5]} "
-  puts "-----------"
-  puts " #{board[6]} | #{board[7]} | #{board[8]} "
-end # counts the length of the board selecting the X's and O's that are filled
+
+# counts the length of the board selecting the X's and O's that are filled
 def turn_count(board)
    board.select{|a| a=="X" || a=="O"}.length
 end
